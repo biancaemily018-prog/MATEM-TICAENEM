@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17365d">
+<title>Desafio ENEM | Matemática</title>
+<style>
+:root{--navy:#17365d;--blue:#2563eb;--pale:#eff6ff;--ink:#172338;--muted:#64748b;--line:#dbe3ee;--bg:#f4f7fb;--green:#147d4c;--greenbg:#ecfdf3;--red:#b93832;--redbg:#fff1f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#142b49,#24558a);color:#fff;padding:32px 20px 58px}
+.container{max-width:1000px;margin:auto}.topline{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{font-size:.76rem;font-weight:800;letter-spacing:.08em;border:1px solid #ffffff55;background:#ffffff18;padding:6px 11px;border-radius:30px}
+h1{font-size:clamp(2rem,5vw,3rem);line-height:1.12;margin:24px 0 8px}.subtitle{color:#dce9f8;margin:0;max-width:690px}
+main{max-width:1000px;margin:-28px auto 45px;padding:0 16px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 8px 28px #1936570b}
+h2{font-size:1.2rem;margin:0 0 14px}.setup{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}.field label{display:block;font-size:.9rem;font-weight:700;margin-bottom:5px}.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;cursor:pointer}.primary{background:var(--blue);color:white}.primary:hover{background:#1d4ed8}.soft{background:var(--pale);color:#17458a}.neutral{background:#eef2f7;color:#344256}button:disabled{opacity:.45;cursor:not-allowed}
+.layout{display:grid;grid-template-columns:1.4fr .6fr;gap:18px}.modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.module{background:#fff;color:var(--ink);border:1px solid var(--line);text-align:left;padding:13px}.module.active{border:2px solid var(--blue);background:#f5f9ff;padding:12px}.module span{display:block;color:var(--muted);font-size:.82rem;font-weight:500;margin-top:3px}
+.stats div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}.stats div:last-child{border:0}.stats span{color:var(--muted)}
+.track{height:9px;background:#e9eef5;border-radius:20px;overflow:hidden;margin:10px 0}.track>div{height:100%;background:#3981e8;width:0;transition:width .2s}
+.meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}.topic{color:var(--blue);font-size:.8rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.question{font-size:1.13rem;font-weight:700;line-height:1.55;margin:14px 0}.support{color:#52647a;margin:0 0 16px}
+.answers{display:grid;gap:10px}.answer{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:550;padding:13px}.answer:hover:not(:disabled){border-color:#83a9e8;background:#f8fbff}.letter{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:8px;background:#edf2f8;font-size:.85rem;font-weight:850}.answer.correct{background:var(--greenbg);border-color:#82c9a2}.answer.correct .letter{background:#d2f1df;color:var(--green)}.answer.incorrect{background:var(--redbg);border-color:#e6a09a}.answer.incorrect .letter{background:#ffdedb;color:var(--red)}
+.feedback{display:none;padding:15px;border-radius:12px;margin-top:15px}.feedback.show{display:block}.feedback.good{background:var(--greenbg);border:1px solid #b9e5ca}.feedback.bad{background:var(--redbg);border:1px solid #efc1bc}.feedback strong{display:block;margin-bottom:5px}
+.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.hidden{display:none!important}.result{text-align:center}.score{font-size:3.2rem;font-weight:900;color:var(--blue);line-height:1.2}.review{text-align:left;margin-top:20px}.review article{padding:12px 0;border-bottom:1px solid var(--line)}.muted{color:var(--muted);font-size:.9rem}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 28px}
+@media(max-width:720px){.setup,.layout{grid-template-columns:1fr}.modules{grid-template-columns:1fr}.card{padding:17px}.actions button{flex:1}}
+</style>
+</head>
+<body>
+<header><div class="container">
+ <div class="topline"><span class="pill">3ª SÉRIE DO ENSINO MÉDIO</span><span class="pill">MATEMÁTICA • ENEM</span></div>
+ <h1>Desafio ENEM</h1><p class="subtitle">Uma jornada de 20 questões para desenvolver interpretação, estratégia e raciocínio matemático.</p>
+</div></header>
+<main>
+ <section class="card" id="startCard">
+  <h2>Identificação do estudante</h2>
+  <div class="setup">
+   <div class="field"><label for="studentName">Nome</label><input id="studentName" type="text" placeholder="Digite seu nome"></div>
+   <div class="field"><label for="studentClass">Turma</label><input id="studentClass" type="text" placeholder="Ex.: 3ª série A"></div>
+   <button class="primary" id="startButton">Começar atividade</button>
+  </div>
+  <p class="muted" id="startMessage">São 20 questões de dificuldade média e difícil, divididas em 5 módulos. A correção aparece logo após cada resposta.</p>
+ </section>
+
+ <section class="layout">
+  <div class="card">
+   <h2>Módulos</h2>
+   <div class="modules" id="moduleList"></div>
+  </div>
+  <aside class="card">
+   <h2>Meu desempenho</h2>
+   <div class="stats">
+    <div><span>Questões respondidas</span><b id="answeredCount">0 / 20</b></div>
+    <div><span>Acertos</span><b id="correctCount">0</b></div>
+    <div><span>Aproveitamento</span><b id="percentage">0%</b></div>
+   </div>
+   <div class="track"><div id="overallBar"></div></div>
+   <p class="muted">O resultado é atualizado conforme você responde.</p>
+  </aside>
+ </section>
+
+ <section class="card" id="quizCard">
+  <div class="meta"><span class="topic" id="moduleName">Módulo 1</span><span id="questionNumber">Questão 1 de 20</span></div>
+  <div class="track"><div id="questionBar"></div></div>
+  <h2 class="question" id="questionText">Informe seu nome e clique em “Começar atividade”.</h2>
+  <p class="support" id="questionContext"></p>
+  <div class="answers" id="answerList"></div>
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+  <div class="actions"><button class="neutral" id="previousButton" disabled>← Anterior</button><button class="primary" id="nextButton" disabled>Próxima questão →</button></div>
+ </section>
+
+ <section class="card hidden" id="resultCard">
+  <div class="result">
+   <div class="topic">Atividade concluída</div><h2 id="resultHeading">Resultado</h2>
+   <div class="score" id="scoreText">0/20</div>
+   <p id="resultSummary" class="muted"></p>
+   <button class="primary" id="restartButton">Refazer atividade</button>
+  </div>
+  <div class="review" id="review"></div>
+ </section>
+</main>
+<footer>Desafio ENEM • Matemática • Atividade de prática</footer>
+<script>
+"use strict";
+const moduleTitles = [
+ "Matemática financeira",
+ "Funções e álgebra",
+ "Geometria",
+ "Estatística e probabilidade",
+ "Razão, proporção e grandezas"
+];
+const moduleSubtitles = [
+ "Porcentagem, juros e planejamento",
+ "Funções, variação e sistemas",
+ "Áreas, volumes e triângulos",
+ "Médias, dados e contagem",
+ "Escalas, vazão e proporcionalidade"
+];
+const questions = [
+ {m:0,t:"Descontos sucessivos",d:"Média",q:"Uma cooperativa de agricultores decidiu substituir parte de suas embalagens por modelos reutilizáveis. Para incentivar a compra, uma loja parceira anunciou uma promoção: um conjunto de recipientes, que custava R$ 320,00, recebeu primeiro um desconto de 15%. Sobre o preço já reduzido, foi aplicado um cupom adicional de 10%. Uma consumidora utilizou os dois benefícios. Qual foi o preço final pago por ela?",c:"Em descontos sucessivos, cada percentual incide sobre o preço vigente naquele momento.",o:["R$ 224,00","R$ 244,80","R$ 248,00","R$ 256,00","R$ 272,00"],a:1,e:"Primeiro: 320 × 0,85 = R$ 272,00. Depois: 272 × 0,90 = R$ 244,80."},
+ {m:0,t:"Juros compostos",d:"Difícil",q:"Uma família iniciou uma reserva para trocar um eletrodoméstico. O valor de R$ 2.000,00 foi aplicado em uma modalidade de investimento que rende 2% ao mês, no regime de juros compostos. Considerando que não houve depósitos nem retiradas durante o período e desprezando impostos e taxas, qual será aproximadamente o montante acumulado após 3 meses?",c:"Nos juros compostos, a taxa de cada período incide sobre o montante do período anterior.",o:["R$ 2.120,00","R$ 2.122,40","R$ 2.122,42","R$ 2.160,00","R$ 2.240,00"],a:2,e:"M = 2.000 × (1,02)³ = R$ 2.122,416. Arredondando para centavos: R$ 2.122,42."},
+ {m:0,t:"Variação percentual",d:"Difícil",q:"O preço de uma cesta de produtos básicos era de R$ 250,00 em janeiro. Até abril, esse valor sofreu um aumento de 12%. Em maio, uma campanha promocional reduziu o preço então praticado em 12%. Um consumidor afirmou que, como o aumento e a redução foram ambos de 12%, a cesta voltou a custar R$ 250,00. Considerando as variações sucessivas, qual é o preço após a promoção?",c:"Aumentos e descontos percentuais sucessivos são calculados sobre bases diferentes.",o:["R$ 246,40","R$ 250,00","R$ 252,00","R$ 253,60","R$ 256,00"],a:0,e:"Após o aumento: 250 × 1,12 = 280. Após a redução: 280 × 0,88 = R$ 246,40."},
+ {m:0,t:"Planejamento financeiro",d:"Média",q:"Uma estudante pretende comprar um computador cujo preço à vista é R$ 3.600,00. Ela já possui R$ 1.200,00 guardados e decidiu economizar a mesma quantia todos os meses, sem rendimento, até alcançar o valor necessário. Se conseguir reservar R$ 300,00 por mês, em quantos meses terá reunido exatamente o valor que falta?",c:"Considere que o preço não sofrerá alterações e que não haverá retiradas da reserva.",o:["6 meses","7 meses","8 meses","9 meses","12 meses"],a:2,e:"Faltam 3.600 − 1.200 = R$ 2.400,00. Dividindo por R$ 300,00 mensais: 2.400 ÷ 300 = 8 meses."},
+
+ {m:1,t:"Função afim e tarifa",d:"Média",q:"Duas empresas oferecem serviços de transporte por aplicativo em determinada região. Na empresa A, o passageiro paga uma taxa fixa de R$ 5,50 mais R$ 1,80 por quilômetro percorrido. Na empresa B, não há taxa fixa, mas o quilômetro custa R$ 2,35. Desconsiderando outros encargos, para qual distância os preços das duas empresas são iguais?",c:"Represente os preços por funções e iguale as expressões.",o:["8 km","9 km","10 km","11 km","12 km"],a:2,e:"5,50 + 1,80x = 2,35x. Assim, 5,50 = 0,55x e x = 10 km."},
+ {m:1,t:"Função quadrática",d:"Difícil",q:"Um produtor rural deseja cercar uma área retangular utilizando 40 metros de tela, aproveitando uma parede existente como um dos lados do retângulo. Assim, ele precisa cercar apenas três lados: dois lados de mesma medida x e um lado de medida y. A área é dada por A(x) = x(40 − 2x). Qual medida de x proporciona a maior área possível?",c:"A expressão é uma função quadrática com concavidade voltada para baixo. O máximo ocorre no vértice.",o:["5 m","8 m","10 m","15 m","20 m"],a:2,e:"A(x) = −2x² + 40x. A abscissa do vértice é x = −b/(2a) = −40/(−4) = 10 m."},
+ {m:1,t:"Taxa de variação",d:"Média",q:"Uma cidade monitora o consumo de água de um reservatório. Em determinado intervalo, o volume armazenado passou de 1 800 m³ para 1 260 m³ em 6 horas, mantendo uma redução constante. A equipe técnica utiliza essa tendência para estimar o comportamento do reservatório. Qual é a taxa média de variação do volume nesse intervalo?",c:"A taxa média é a variação do volume dividida pelo intervalo de tempo.",o:["−120 m³/h","−100 m³/h","−90 m³/h","90 m³/h","100 m³/h"],a:2,e:"(1.260 − 1.800) ÷ 6 = −540 ÷ 6 = −90 m³/h."},
+ {m:1,t:"Sistema de equações",d:"Difícil",q:"Durante uma feira de ciências, uma escola vendeu 80 ingressos para arrecadar recursos. Os ingressos para estudantes custavam R$ 8,00 e os destinados a familiares custavam R$ 15,00. Ao final da venda, a arrecadação foi de R$ 850,00. Considerando que todos os ingressos foram vendidos por esses valores, quantos ingressos de R$ 15,00 foram vendidos?",c:"Use x para ingressos de R$ 8,00 e y para ingressos de R$ 15,00.",o:["30","35","40","45","50"],a:0,e:"x + y = 80 e 8x + 15y = 850. Substituindo x = 80 − y: 640 + 7y = 850; y = 30."},
+
+ {m:2,t:"Área e revestimento",d:"Difícil",q:"Uma escola vai reformar o piso de uma sala retangular de 8 m de comprimento por 6 m de largura. No centro da sala será instalado um palco quadrado de 2,5 m de lado, que não receberá o mesmo revestimento do restante do piso. O material escolhido é vendido em caixas que cobrem 2 m² cada. Desconsiderando perdas e recortes, quantas caixas serão necessárias para revestir somente a área externa ao palco?",c:"Subtraia a área do palco da área da sala. Depois, divida por 2 e arredonde para cima, pois as caixas são inteiras.",o:["18 caixas","19 caixas","20 caixas","21 caixas","22 caixas"],a:3,e:"Sala: 8 × 6 = 48 m². Palco: 2,5 × 2,5 = 6,25 m². Restam 41,75 m². 41,75 ÷ 2 = 20,875; são necessárias 21 caixas."},
+ {m:2,t:"Volume e capacidade",d:"Média",q:"Uma caixa-d'água em formato de paralelepípedo retângulo possui dimensões internas de 1,5 m de comprimento, 1,2 m de largura e 1 m de altura. Por segurança, o fabricante recomenda que ela seja preenchida até, no máximo, 80% de sua capacidade total. Sabendo que 1 m³ corresponde a 1 000 litros, qual é o volume máximo de água recomendado, em litros?",c:"Calcule o volume total, converta para litros e determine 80% dessa capacidade.",o:["1 080 L","1 200 L","1 320 L","1 440 L","1 500 L"],a:3,e:"Volume = 1,5 × 1,2 × 1 = 1,8 m³ = 1.800 L. 80% de 1.800 = 1.440 L."},
+ {m:2,t:"Semelhança de triângulos",d:"Média",q:"Para estimar a altura de uma árvore, uma estudante posicionou uma haste vertical de 1,5 m em um terreno plano. No mesmo instante, a sombra da haste media 2 m, enquanto a sombra da árvore media 12 m. Considerando que os raios solares formam o mesmo ângulo com o solo e que a árvore e a haste estão na vertical, qual é a altura estimada da árvore?",c:"Os dois triângulos retângulos são semelhantes, pois possuem ângulos correspondentes iguais.",o:["6 m","7,5 m","8 m","9 m","10 m"],a:3,e:"h/12 = 1,5/2. Logo, h = 12 × 1,5 ÷ 2 = 9 m."},
+ {m:2,t:"Teorema de Pitágoras",d:"Média",q:"Uma equipe de manutenção precisa instalar um cabo de sustentação entre o topo de um poste de 12 m de altura e um ponto no chão localizado a 5 m da base do poste. O cabo será esticado em linha reta, sem folga. Qual deve ser o comprimento mínimo desse cabo?",c:"O poste e a distância horizontal são os catetos de um triângulo retângulo; o cabo é a hipotenusa.",o:["11 m","12 m","13 m","14 m","17 m"],a:2,e:"c² = 12² + 5² = 144 + 25 = 169. Portanto, c = 13 m."},
+
+ {m:3,t:"Média ponderada",d:"Média",q:"Em uma disciplina, a nota final é calculada por média ponderada: a prova tem peso 3, o trabalho tem peso 2 e a participação tem peso 1. Um estudante obteve nota 6,0 na prova, 8,0 no trabalho e 10,0 na participação. Qual foi sua nota final, aproximadamente, de acordo com esse critério?",c:"Multiplique cada nota pelo respectivo peso e divida pela soma dos pesos.",o:["7,0","7,2","7,3","7,5","8,0"],a:2,e:"(6×3 + 8×2 + 10×1) ÷ 6 = 44/6 ≈ 7,33. Com uma casa decimal: 7,3."},
+ {m:3,t:"Probabilidade",d:"Média",q:"Uma campanha de vacinação organizou fichas de atendimento em uma urna para sortear a ordem de participação de voluntários. Foram colocadas 12 fichas azuis, 8 verdes e 5 amarelas, todas indistinguíveis ao toque. Uma ficha será retirada ao acaso. Qual é a probabilidade de a ficha sorteada não ser verde?",c:"Calcule o total de fichas e a quantidade de fichas que não são verdes.",o:["8%","20%","32%","60%","68%"],a:4,e:"Há 25 fichas no total. Não verdes: 12 + 5 = 17. P = 17/25 = 0,68 = 68%."},
+ {m:3,t:"Média aritmética",d:"Média",q:"Uma unidade de saúde registrou a quantidade de atendimentos em cinco dias: segunda-feira, 42; terça-feira, 38; quarta-feira, 45; quinta-feira, 35; e sexta-feira, 40. Para planejar a equipe da semana seguinte, a coordenação deseja utilizar a média diária de atendimentos desse período. Qual foi essa média?",c:"Some os cinco registros e divida pela quantidade de dias observados.",o:["38 atendimentos","39 atendimentos","40 atendimentos","41 atendimentos","42 atendimentos"],a:2,e:"42 + 38 + 45 + 35 + 40 = 200. Média = 200 ÷ 5 = 40 atendimentos."},
+ {m:3,t:"Princípio multiplicativo",d:"Difícil",q:"Uma escola organizará uma mostra cultural e cada grupo deverá escolher uma apresentação composta por uma modalidade artística e uma cor para identificar seu estande. Estão disponíveis 4 modalidades diferentes de apresentação e 3 cores de identificação. Cada grupo escolherá exatamente uma modalidade e uma cor, podendo qualquer modalidade ser combinada com qualquer cor. Quantas combinações diferentes são possíveis?",c:"A escolha é feita em duas etapas independentes: modalidade e cor.",o:["7","9","12","16","24"],a:2,e:"Pelo princípio multiplicativo: 4 possibilidades de modalidade × 3 possibilidades de cor = 12 combinações."},
+
+ {m:4,t:"Regra de três composta",d:"Difícil",q:"Uma equipe de 6 trabalhadores, mantendo o mesmo ritmo, consegue organizar um depósito em 8 dias, trabalhando 5 horas por dia. Para concluir um serviço semelhante, a empresa disponibilizou 10 trabalhadores, que trabalharão 6 horas por dia, com produtividade individual igual à da primeira equipe. Em quantos dias o novo grupo deverá concluir o serviço?",c:"O trabalho total é constante. Considere trabalhador × hora × dia.",o:["3 dias","4 dias","5 dias","6 dias","7 dias"],a:1,e:"Trabalho total: 6 × 8 × 5 = 240 trabalhador-horas. Nova produção diária: 10 × 6 = 60. Dias = 240 ÷ 60 = 4."},
+ {m:4,t:"Escala cartográfica",d:"Média",q:"Em um mapa rodoviário, a distância em linha reta entre duas cidades é de 7,2 cm. A escala indicada é 1 : 250 000, o que significa que cada centímetro no mapa representa 250 000 centímetros na realidade. Qual é a distância real aproximada entre as cidades, em quilômetros?",c:"Converta centímetros para quilômetros. Lembre-se: 100 000 cm equivalem a 1 km.",o:["1,8 km","7,2 km","18 km","25 km","180 km"],a:2,e:"7,2 × 250.000 = 1.800.000 cm. Dividindo por 100.000: 18 km."},
+ {m:4,t:"Vazão",d:"Difícil",q:"Uma torneira despeja água em um reservatório a uma vazão constante de 18 litros por minuto. Inicialmente, o reservatório estava vazio. Após 25 minutos, uma segunda torneira, com vazão constante de 12 litros por minuto, também foi aberta. Mantendo as duas torneiras abertas, quanto tempo será necessário, a partir da abertura da segunda torneira, para que o reservatório receba mais 450 litros?",c:"Quando duas torneiras funcionam simultaneamente, as vazões são somadas.",o:["10 minutos","12 minutos","15 minutos","18 minutos","25 minutos"],a:2,e:"Vazão conjunta = 18 + 12 = 30 L/min. Tempo = 450 ÷ 30 = 15 minutos."},
+ {m:4,t:"Razão e proporção",d:"Média",q:"Uma indústria utiliza uma mistura de dois componentes para fabricar determinado produto. A receita técnica estabelece que, para cada 3 partes do componente A, devem ser utilizadas 5 partes do componente B. Em um lote, a indústria precisa produzir 64 kg da mistura, mantendo exatamente essa proporção. Qual massa do componente B deverá ser utilizada?",c:"A mistura possui 3 + 5 = 8 partes iguais. O componente B corresponde a 5 dessas partes.",o:["24 kg","32 kg","36 kg","40 kg","48 kg"],a:3,e:"Componente B = (5/8) × 64 = 40 kg."}
+];
+
+const $ = id => document.getElementById(id);
+let current = 0;
+let started = false;
+let answers = Array(questions.length).fill(null);
+
+function renderModules(){
+ $("moduleList").innerHTML = moduleTitles.map((title,index)=>{
+  const count = questions.filter(q=>q.m===index).length;
+  const active = started && questions[current].m===index;
+  return `<button type="button" class="module ${active?'active':''}" data-module="${index}">${index+1}. ${title}<span>${moduleSubtitles[index]} • ${count} questões</span></button>`;
+ }).join("");
+ document.querySelectorAll("[data-module]").forEach(button=>{
+  button.addEventListener("click",()=>{
+   if(!started)return;
+   const moduleIndex = Number(button.dataset.module);
+   const firstQuestion = questions.findIndex(q=>q.m===moduleIndex);
+   if(firstQuestion>=0){current=firstQuestion;renderQuestion();}
+  });
+ });
+}
+function updateStats(){
+ const done=answers.filter(a=>a!==null).length;
+ const hits=answers.reduce((sum,a,i)=>sum+(a===questions[i].a?1:0),0);
+ $("answeredCount").textContent=`${done} / ${questions.length}`;
+ $("correctCount").textContent=hits;
+ $("percentage").textContent=done?`${Math.round(hits/done*100)}%`:"0%";
+ $("overallBar").style.width=`${done/questions.length*100}%`;
+}
+function renderQuestion(){
+ const q=questions[current];
+ $("moduleName").textContent=`Módulo ${q.m+1} • ${moduleTitles[q.m]}`;
+ $("questionNumber").textContent=`Questão ${current+1} de ${questions.length} • ${q.d}`;
+ $("questionBar").style.width=`${(current+1)/questions.length*100}%`;
+ $("questionText").textContent=q.q;
+ $("questionContext").textContent=q.c;
+ $("answerList").innerHTML=q.o.map((option,index)=>`<button type="button" class="answer" data-answer="${index}" ${answers[current]!==null?'disabled':''}><span class="letter">${"ABCDE"[index]}</span><span>${option}</span></button>`).join("");
+ document.querySelectorAll("[data-answer]").forEach(button=>button.addEventListener("click",()=>selectAnswer(Number(button.dataset.answer))));
+ $("feedback").className="feedback";
+ $("feedback").textContent="";
+ if(answers[current]!==null) showFeedback();
+ $("previousButton").disabled=current===0;
+ $("nextButton").disabled=answers[current]===null;
+ $("nextButton").textContent=current===questions.length-1?"Ver resultado →":"Próxima questão →";
+ renderModules();
+ updateStats();
+}
+function selectAnswer(index){
+ if(answers[current]!==null)return;
+ answers[current]=index;
+ showFeedback();
+ $("nextButton").disabled=false;
+ updateStats();
+}
+function showFeedback(){
+ const q=questions[current],selected=answers[current],correct=selected===q.a;
+ document.querySelectorAll("[data-answer]").forEach((button,index)=>{
+  button.disabled=true;
+  if(index===q.a)button.classList.add("correct");
+  if(index===selected&&!correct)button.classList.add("incorrect");
+ });
+ const feedback=$("feedback");
+ feedback.className=`feedback show ${correct?"good":"bad"}`;
+ feedback.innerHTML=`<strong>${correct?"✓ Resposta correta!":"✕ Vamos revisar esse raciocínio."}</strong><span><b>Alternativa ${"ABCDE"[q.a]}.</b> ${q.e}</span>`;
+}
+function start(){
+ const name=$("studentName").value.trim();
+ if(!name){$("startMessage").textContent="Por favor, informe seu nome para começar."; $("studentName").focus();return;}
+ started=true;
+ $("startButton").disabled=true;
+ $("startButton").textContent="Atividade iniciada";
+ $("startMessage").textContent=`Boa atividade, ${name}! Leia os enunciados com atenção.`;
+ renderQuestion();
+ $("quizCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function finish(){
+ $("quizCard").classList.add("hidden");
+ $("resultCard").classList.remove("hidden");
+ const hits=answers.filter((a,i)=>a===questions[i].a).length;
+ const missed=questions.map((q,i)=>({q,i})).filter(item=>answers[item.i]!==item.q.a);
+ $("scoreText").textContent=`${hits} / ${questions.length}`;
+ $("resultHeading").textContent=hits>=16?"Excelente desempenho!":hits>=12?"Bom trabalho!":"Continue praticando!";
+ $("resultSummary").textContent=`${$("studentName").value.trim()} • ${$("studentClass").value.trim()||"Turma não informada"} • Aproveitamento: ${Math.round(hits/questions.length*100)}%.`;
+ $("review").innerHTML=`<h2>Revisão das questões</h2>`+(missed.length?missed.map(({q,i})=>`<article><b>Questão ${i+1} — ${q.t}</b><p class="muted">Sua resposta: ${answers[i]===null?"Não respondida":"Alternativa "+ "ABCDE"[answers[i]]} • Correta: ${"ABCDE"[q.a]}</p><p>${q.e}</p></article>`).join(""):"<p>Parabéns! Você acertou todas as questões.</p>");
+ updateStats();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+$("startButton").addEventListener("click",start);
+$("previousButton").addEventListener("click",()=>{if(current>0){current--;renderQuestion();}});
+$("nextButton").addEventListener("click",()=>{if(current<questions.length-1){current++;renderQuestion();}else finish();});
+$("restartButton").addEventListener("click",()=>{
+ answers=Array(questions.length).fill(null);current=0;started=false;
+ $("resultCard").classList.add("hidden");$("quizCard").classList.remove("hidden");
+ $("startButton").disabled=false;$("startButton").textContent="Começar atividade";
+ $("startMessage").textContent="São 20 questões de dificuldade média e difícil, divididas em 5 módulos. A correção aparece logo após cada resposta.";
+ renderModules();updateStats();window.scrollTo({top:0,behavior:"smooth"});
+});
+renderModules();updateStats();
+</script>
+</body>
+</html>
